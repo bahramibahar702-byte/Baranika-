@@ -1,0 +1,19 @@
+{
+  "previewPort": 3000,
+  "healthPath": "/",
+  "startCommand": "docker compose -f docker-compose.base44.yml up -d",
+  "secrets": [
+    {
+      "name": "ADMIN_PASSWORD",
+      "description": "رمز ورود پنل مدیریت بارانیکا (/admin) — برای امنیت مقدار واقعی را در داشبورد Secrets جایگزین کنید",
+      "requiredAtBoot": true,
+      "generatedForDevelopment": true
+    },
+    {
+      "name": "ADMIN_TOKEN_SECRET",
+      "description": "کلید امضای توکن نشست مدیر (مقدار تصادفی بلند)",
+      "requiredAtBoot": true,
+      "generatedForDevelopment": true
+    }
+  ]
+}
