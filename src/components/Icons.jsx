@@ -55,6 +55,7 @@ export const IconTruck = (p) => <S {...p}><path d="M3 7h10v9H3zM13 10h4l3 3v3h-7
 export const IconInstagram = (p) => <S {...p}><rect x="4" y="4" width="16" height="16" rx="4.5" /><circle cx="12" cy="12" r="3.6" /><circle cx="16.8" cy="7.2" r="0.9" fill="currentColor" stroke="none" /></S>
 export const IconTelegram = (p) => <S {...p}><path d="m20.5 4.5-17 6.8 5.2 2 2 6 2.7-4 4.6 3.4z" /><path d="M8.7 13.3 20.5 4.5l-8 10" /></S>
 export const IconWhatsapp = (p) => <S {...p}><path d="M4 20l1-4a8 8 0 1 1 3 3z" /><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-2-2-1-1 1c-1-.5-2-1.5-2.5-2.5l1-1-1-2z" /></S>
+export const IconAlert = (p) => <S {...p}><circle cx="12" cy="12" r="9" /><path d="M12 7.5V13M12 16.4v.2" /></S>
 
 // Category glyphs (small filled illustrations, drawn in brand colors)
 export const GlyphHoney = () => (

@@ -4,6 +4,7 @@ import { api } from '../lib/api.js'
 import { faPrice, faNum, faDate } from '../lib/format.js'
 import { useSettings } from '../lib/store.jsx'
 import { Spinner, EmptyState } from '../components/Ui.jsx'
+import { IconSearch, IconLeaf } from '../components/Icons.jsx'
 
 export default function OrderConfirmation() {
   const { orderNumber } = useParams()
@@ -18,7 +19,7 @@ export default function OrderConfirmation() {
   if (error) {
     return (
       <div className="container">
-        <EmptyState icon="🔍" title="سفارش یافت نشد" text="شماره سفارش را بررسی کنید.">
+        <EmptyState icon={<IconSearch size={46} />} title="سفارش یافت نشد" text="شماره سفارش را بررسی کنید.">
           <Link to="/shop" className="btn btn-outline" style={{ marginTop: 14 }}>بازگشت به فروشگاه</Link>
         </EmptyState>
       </div>
@@ -29,7 +30,7 @@ export default function OrderConfirmation() {
   return (
     <div className="container" style={{ paddingBlock: '34px 56px', maxWidth: 760 }}>
       <div className="panel panel-pad" style={{ textAlign: 'center' }}>
-        <div style={{ fontSize: '3rem' }}>🌿</div>
+        <div className="confirm-mark" aria-hidden="true"><IconLeaf size={30} /></div>
         <h1 style={{ fontSize: '1.5rem', margin: '8px 0' }}>سفارش شما ثبت شد</h1>
         <p style={{ color: 'var(--muted)', fontSize: '0.95rem' }}>
           شماره سفارش: <b dir="ltr">{order.order_number}</b> · وضعیت فعلی: <b>{order.status_label}</b>

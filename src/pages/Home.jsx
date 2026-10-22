@@ -4,29 +4,29 @@ import { api } from '../lib/api.js'
 import ProductCard, { ProductGridSkeleton } from '../components/ProductCard.jsx'
 import HeroArt from '../components/HeroArt.jsx'
 import { SectionHead, ErrorState } from '../components/Ui.jsx'
-import { GLYPHS } from '../components/Icons.jsx'
+import { IconLeaf, IconSearch, IconChat, IconTag, IconHandshake } from '../components/Icons.jsx'
 
 function TrustSection() {
   const cards = [
     {
       title: 'انتخاب با دقت',
       text: 'محصولات با توجه به کیفیت و اطلاعات تأمین‌کننده انتخاب می‌شوند.',
-      icon: '🔍',
+      Icon: IconSearch,
     },
     {
       title: 'صداقت در معرفی',
       text: 'اطلاعات محصولات شفاف و بدون ادعاهای اغراق‌آمیز ارائه می‌شود.',
-      icon: '💬',
+      Icon: IconChat,
     },
     {
       title: 'قیمت منصفانه',
       text: 'تلاش می‌کنیم کیفیت مناسب را با قیمت منصفانه عرضه کنیم.',
-      icon: '🏷️',
+      Icon: IconTag,
     },
     {
       title: 'ارتباط با مشتری',
       text: 'پاسخ‌گویی و احترام به مشتری از اولویت‌های ماست.',
-      icon: '🤝',
+      Icon: IconHandshake,
     },
   ]
   return (
@@ -41,7 +41,7 @@ function TrustSection() {
             <div className="trust-grid">
               {cards.map((c) => (
                 <div className="trust-card" key={c.title}>
-                  <div className="trust-icon" aria-hidden="true">{c.icon}</div>
+                  <div className="trust-icon" aria-hidden="true"><c.Icon size={24} /></div>
                   <h3>{c.title}</h3>
                   <p>{c.text}</p>
                 </div>
@@ -88,7 +88,7 @@ export default function Home() {
       <section className="hero">
         <div className="container hero-inner">
           <div>
-            <span className="hero-kicker">🌿 فروشگاه محصولات طبیعی و سنتی</span>
+            <span className="hero-kicker"><IconLeaf size={15} /> فروشگاه محصولات طبیعی و سنتی</span>
             <h1>
               <em>طبیعی</em> انتخاب کن،
               <br />
@@ -127,10 +127,11 @@ export default function Home() {
           {data.cats ? (
             <div className="cat-grid">
               {data.cats.map((c) => {
-                const Glyph = GLYPHS[c.icon] || GLYPHS.leaf
                 return (
                   <Link to={`/category/${c.slug}`} className="cat-card" key={c.id}>
-                    <span className="cat-icon"><Glyph /></span>
+                    {c.image
+                      ? <img className="cat-photo" src={c.image} alt="" loading="lazy" />
+                      : <span className="cat-icon">🌿</span>}
                     <h3>{c.name}</h3>
                     {c.description && <p>{c.description}</p>}
                     <div className="cat-count">{new Intl.NumberFormat('fa-IR').format(c.product_count)} محصول</div>
@@ -167,13 +168,6 @@ export default function Home() {
                   <p>{b.subtitle}</p>
                   <span className="btn">{b.cta_text || 'مشاهده'}</span>
                 </div>
-                <svg className="pb-art" viewBox="0 0 200 200" aria-hidden="true">
-                  <path d="M100 20c30 0 55 22 55 55 0 40-30 65-55 65s-55-25-55-65c0-33 25-55 55-55z" fill="#F8F4EA" opacity="0.2" />
-                  <path d="M20 190C40 150 90 130 180 140" stroke="#F8F4EA" strokeWidth="2" fill="none" opacity="0.4" />
-                  <rect x="70" y="90" width="60" height="46" rx="8" fill="#F8F4EA" opacity="0.85" />
-                  <path d="M84 108h32M86 118h28" stroke="#71875A" strokeWidth="3" strokeLinecap="round" />
-                  <rect x="82" y="72" width="36" height="16" rx="5" fill="#795443" />
-                </svg>
               </Link>
             </div>
           </div>
@@ -203,12 +197,6 @@ export default function Home() {
                   <p>{b.subtitle}</p>
                   <span className="btn">{b.cta_text || 'مشاهده'}</span>
                 </div>
-                <svg className="pb-art" viewBox="0 0 200 200" aria-hidden="true">
-                  <circle cx="120" cy="110" r="62" fill="#F8F4EA" opacity="0.2" />
-                  <rect x="60" y="86" width="72" height="50" rx="8" fill="#F8F4EA" opacity="0.9" />
-                  <path d="M74 104h44M76 116h40" stroke="#795443" strokeWidth="3" strokeLinecap="round" />
-                  <rect x="72" y="68" width="48" height="18" rx="6" fill="#214D35" />
-                </svg>
               </Link>
             </div>
           </div>
@@ -230,8 +218,8 @@ export default function Home() {
       {/* Brand teaser */}
       <section className="section" style={{ paddingTop: 0 }}>
         <div className="container">
-          <div className="panel panel-pad" style={{ display: 'flex', gap: 24, alignItems: 'center', flexWrap: 'wrap' }}>
-            <div style={{ flex: '1 1 300px' }}>
+          <div className="panel panel-pad brand-teaser">
+            <div>
               <h2 style={{ fontSize: '1.3rem' }}>داستان بارانیکا</h2>
               <p style={{ color: 'var(--muted)', fontSize: '0.95rem', marginTop: 10 }}>
                 بارانیکا با یک هدف ساده شروع شد: رسیدن خوراکی‌های طبیعی و اصیل به سفره‌ی خانواده‌ها. هر محصول را با توجه
@@ -239,8 +227,8 @@ export default function Home() {
               </p>
               <Link to="/about" className="btn btn-soft" style={{ marginTop: 16 }}>بیشتر بخوانید</Link>
             </div>
-            <div style={{ flex: '0 1 260px' }}>
-              <HeroArt style={{ maxWidth: 260 }} />
+            <div className="brand-teaser-photo">
+              <img src="/photos/shelf.jpg" alt="قفسه‌ای از خوراکی‌های طبیعی در شیشه‌های شفاف" loading="lazy" />
             </div>
           </div>
         </div>

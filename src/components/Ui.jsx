@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { IconLeaf, IconAlert } from './Icons.jsx'
 
 // Shared small UI pieces: section head, empty/error states, quantity stepper
 export function SectionHead({ title, sub, more, moreTo }) {
@@ -22,10 +23,10 @@ export function SectionHead({ title, sub, more, moreTo }) {
   )
 }
 
-export function EmptyState({ icon = '🧺', title, text, children }) {
+export function EmptyState({ icon, title, text, children }) {
   return (
     <div className="state-box">
-      <div className="big" aria-hidden="true">{icon}</div>
+      <div className="big" aria-hidden="true">{icon || <IconLeaf size={46} />}</div>
       <h3>{title}</h3>
       {text && <p>{text}</p>}
       {children}
@@ -36,7 +37,7 @@ export function EmptyState({ icon = '🧺', title, text, children }) {
 export function ErrorState({ text = 'در بارگذاری اطلاعات مشکلی پیش آمد. دوباره تلاش کنید.', onRetry }) {
   return (
     <div className="state-box">
-      <div className="big" aria-hidden="true">⚠️</div>
+      <div className="big" aria-hidden="true"><IconAlert size={46} /></div>
       <h3>مشکلی پیش آمد</h3>
       <p>{text}</p>
       {onRetry && (

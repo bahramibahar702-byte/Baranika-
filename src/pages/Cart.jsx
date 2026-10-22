@@ -5,7 +5,7 @@ import { useCart, useSettings } from '../lib/store.jsx'
 import { EmptyState, QtyStepper } from '../components/Ui.jsx'
 import ProductArt from '../components/ProductArt.jsx'
 import { faPrice, faNum } from '../lib/format.js'
-import { IconTrash } from '../components/Icons.jsx'
+import { IconTrash, IconCart, IconAlert } from '../components/Icons.jsx'
 
 export default function Cart() {
   const { cart, setQty, removeFromCart } = useCart()
@@ -30,13 +30,13 @@ export default function Cart() {
     return () => { live = false }
   }, [cart])
 
-  if (error) return <div className="container"><EmptyState icon="⚠️" title="خطا در بارگذاری سبد" text="دوباره تلاش کنید." /></div>
+  if (error) return <div className="container"><EmptyState icon={<IconAlert size={46} />} title="خطا در بارگذاری سبد" text="دوباره تلاش کنید." /></div>
   if (!rows) return <div className="spinner" role="status" />
 
   if (!rows.length) {
     return (
       <div className="container">
-        <EmptyState icon="🛒" title="سبد خرید شما خالی است" text="از فروشگاه محصولات طبیعی بارانیکا دیدن کنید.">
+        <EmptyState icon={<IconCart size={46} />} title="سبد خرید شما خالی است" text="از فروشگاه محصولات طبیعی بارانیکا دیدن کنید.">
           <Link to="/shop" className="btn btn-primary" style={{ marginTop: 16 }}>مشاهده محصولات</Link>
         </EmptyState>
       </div>
@@ -87,7 +87,7 @@ export default function Cart() {
           <div className="summary-row"><span>هزینه ارسال</span><span>{shipping === 0 ? 'رایگان' : faPrice(shipping)}</span></div>
           {threshold > 0 && subtotal < threshold && (
             <div className="free-ship-hint">
-              با {faPrice(threshold - subtotal)} خرید بیشتر، ارسال رایگان می‌شود 🌿
+              با {faPrice(threshold - subtotal)} خرید بیشتر، ارسال رایگان می‌شود.
             </div>
           )}
           <div className="summary-row total"><span>مبلغ نهایی</span><span>{faPrice(total)}</span></div>

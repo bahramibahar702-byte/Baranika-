@@ -3,7 +3,7 @@ import { Link, useSearchParams } from 'react-router-dom'
 import { api } from '../lib/api.js'
 import ProductCard, { ProductGridSkeleton } from '../components/ProductCard.jsx'
 import { EmptyState, ErrorState, Spinner } from '../components/Ui.jsx'
-import { GLYPHS } from '../components/Icons.jsx'
+import { GLYPHS, IconSearch } from '../components/Icons.jsx'
 import { faNum } from '../lib/format.js'
 
 const SORTS = [
@@ -95,7 +95,7 @@ export default function Shop({ presetCategory = '' }) {
                       checked={category === c.slug}
                       onChange={() => update('category', c.slug)}
                     />
-                    <Glyph /> {c.name}
+                    {c.image ? <img className="filter-thumb" src={c.image} alt="" loading="lazy" /> : <Glyph />} {c.name}
                   </label>
                 )
               })}
@@ -147,7 +147,7 @@ export default function Shop({ presetCategory = '' }) {
               </div>
             ) : shown.length === 0 ? (
               <EmptyState
-                icon="🔍"
+                icon={<IconSearch size={46} />}
                 title="محصولی پیدا نشد"
                 text="فیلترها را تغییر دهید یا عبارت دیگری را جستجو کنید."
               >
